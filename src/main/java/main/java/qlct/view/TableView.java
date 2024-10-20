@@ -313,7 +313,7 @@ public class TableView extends javax.swing.JFrame {
                 e.printStackTrace();
             }
         } else {
-            JOptionPane.showMessageDialog(null,"Error");
+            JOptionPane.showMessageDialog(null,"Bạn chưa chọn ô để sửa");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
