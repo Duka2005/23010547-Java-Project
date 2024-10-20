@@ -9,6 +9,7 @@ import com.google.gson.reflect.TypeToken;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import main.java.qlct.bangct.BangThuChi;
 
@@ -164,6 +165,11 @@ public class TableView extends javax.swing.JFrame {
         jButton2.setMaximumSize(new java.awt.Dimension(76, 40));
         jButton2.setMinimumSize(new java.awt.Dimension(76, 40));
         jButton2.setPreferredSize(new java.awt.Dimension(76, 40));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Xóa");
         jButton3.setMaximumSize(new java.awt.Dimension(76, 40));
@@ -288,6 +294,28 @@ public class TableView extends javax.swing.JFrame {
         displaytype.setText(model.getValueAt(selectedRowIndex, 4).toString());
         displaymoney.setText(model.getValueAt(selectedRowIndex, 5).toString());
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        int i = jTable1.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        if (i >= 0){
+            model.setValueAt(displaymonth.getText(),i,0);
+            model.setValueAt(displayday.getText(),i,1);
+            model.setValueAt(displayyear.getText(),i,2);
+            model.setValueAt(displaythuchi.getText(),i,3);
+            model.setValueAt(displaytype.getText(),i,4);
+            model.setValueAt(displaymoney.getText(),i,5);
+            tablethuchi.set(i,new BangThuChi(Integer.parseInt(displaymonth.getText()),Integer.parseInt(displayday.getText()),Integer.parseInt(displayyear.getText()),displaythuchi.getText(),displaytype.getText(),Integer.parseInt(displaymoney.getText())));
+            try (FileWriter writer = new FileWriter("data.json")) {
+                writer.write(gson.toJson(tablethuchi));
+                writer.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null,"Error");
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addbutton;
