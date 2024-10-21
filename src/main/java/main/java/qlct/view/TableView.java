@@ -8,6 +8,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
+import static java.lang.Double.NaN;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -76,9 +78,9 @@ public class TableView extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         addbutton = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        updatebutton = new javax.swing.JButton();
+        removebutton = new javax.swing.JButton();
+        clearbutton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1084, 800));
@@ -161,25 +163,35 @@ public class TableView extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Sửa");
-        jButton2.setMaximumSize(new java.awt.Dimension(76, 40));
-        jButton2.setMinimumSize(new java.awt.Dimension(76, 40));
-        jButton2.setPreferredSize(new java.awt.Dimension(76, 40));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        updatebutton.setText("Sửa");
+        updatebutton.setMaximumSize(new java.awt.Dimension(76, 40));
+        updatebutton.setMinimumSize(new java.awt.Dimension(76, 40));
+        updatebutton.setPreferredSize(new java.awt.Dimension(76, 40));
+        updatebutton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                updatebuttonActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Xóa");
-        jButton3.setMaximumSize(new java.awt.Dimension(76, 40));
-        jButton3.setMinimumSize(new java.awt.Dimension(76, 40));
-        jButton3.setPreferredSize(new java.awt.Dimension(76, 40));
+        removebutton.setText("Xóa");
+        removebutton.setMaximumSize(new java.awt.Dimension(76, 40));
+        removebutton.setMinimumSize(new java.awt.Dimension(76, 40));
+        removebutton.setPreferredSize(new java.awt.Dimension(76, 40));
+        removebutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removebuttonActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Clear");
-        jButton4.setMaximumSize(new java.awt.Dimension(76, 40));
-        jButton4.setMinimumSize(new java.awt.Dimension(76, 40));
-        jButton4.setPreferredSize(new java.awt.Dimension(76, 40));
+        clearbutton.setText("Clear");
+        clearbutton.setMaximumSize(new java.awt.Dimension(76, 40));
+        clearbutton.setMinimumSize(new java.awt.Dimension(76, 40));
+        clearbutton.setPreferredSize(new java.awt.Dimension(76, 40));
+        clearbutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearbuttonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -191,11 +203,11 @@ public class TableView extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(addbutton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(clearbutton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(updatebutton, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(removebutton, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -255,10 +267,10 @@ public class TableView extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(removebutton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(updatebutton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(clearbutton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(142, 142, 142))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -273,18 +285,25 @@ public class TableView extends javax.swing.JFrame {
     }//GEN-LAST:event_displaymonthActionPerformed
 
     private void addbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addbuttonActionPerformed
-        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
-        model.addRow(new Object[]{displaymonth.getText(),displayday.getText(),displayyear.getText(),displaythuchi.getText(),displaytype.getText(),displaymoney.getText()});
-        tablethuchi.add(new BangThuChi(Integer.parseInt(displaymonth.getText()),Integer.parseInt(displayday.getText()),Integer.parseInt(displayyear.getText()),displaythuchi.getText(),displaytype.getText(),Integer.parseInt(displaymoney.getText())));
-        try (FileWriter writer = new FileWriter("data.json")) {
-            writer.write(gson.toJson(tablethuchi));
-            writer.close();
-        } catch (Exception e) {
+        try{
+            if (Integer.parseInt(displaymonth.getText()) != NaN && Integer.parseInt(displayday.getText()) != NaN && Integer.parseInt(displayyear.getText()) != NaN && Integer.parseInt(displaymoney.getText()) != NaN){
+                DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+                model.addRow(new Object[]{displaymonth.getText(),displayday.getText(),displayyear.getText(),displaythuchi.getText(),displaytype.getText(),displaymoney.getText()});
+                tablethuchi.add(new BangThuChi(Integer.parseInt(displaymonth.getText()),Integer.parseInt(displayday.getText()),Integer.parseInt(displayyear.getText()),displaythuchi.getText(),displaytype.getText(),Integer.parseInt(displaymoney.getText())));
+                FileWriter writer = new FileWriter("data.json");
+                writer.write(gson.toJson(tablethuchi));
+                writer.close();
+            }
+        } catch (IOException e) {
             e.printStackTrace();
+        } catch (NumberFormatException e){
+            JOptionPane.showMessageDialog(null,"Phần Tháng/Ngày/Năm hoặc Tiền không phải là số");
         }
     }//GEN-LAST:event_addbuttonActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        updatebutton.setEnabled(true);
+        removebutton.setEnabled(true);
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
         int selectedRowIndex = jTable1.getSelectedRow();
         displaymonth.setText(model.getValueAt(selectedRowIndex, 0).toString());
@@ -295,39 +314,77 @@ public class TableView extends javax.swing.JFrame {
         displaymoney.setText(model.getValueAt(selectedRowIndex, 5).toString());
     }//GEN-LAST:event_jTable1MouseClicked
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        int i = jTable1.getSelectedRow();
-        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
-        if (i >= 0){
-            model.setValueAt(displaymonth.getText(),i,0);
-            model.setValueAt(displayday.getText(),i,1);
-            model.setValueAt(displayyear.getText(),i,2);
-            model.setValueAt(displaythuchi.getText(),i,3);
-            model.setValueAt(displaytype.getText(),i,4);
-            model.setValueAt(displaymoney.getText(),i,5);
-            tablethuchi.set(i,new BangThuChi(Integer.parseInt(displaymonth.getText()),Integer.parseInt(displayday.getText()),Integer.parseInt(displayyear.getText()),displaythuchi.getText(),displaytype.getText(),Integer.parseInt(displaymoney.getText())));
-            try (FileWriter writer = new FileWriter("data.json")) {
-                writer.write(gson.toJson(tablethuchi));
-                writer.close();
-            } catch (Exception e) {
-                e.printStackTrace();
+    private void updatebuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatebuttonActionPerformed
+        try{
+            int i = jTable1.getSelectedRow();
+            DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+            if (i >= 0){
+                if (Integer.parseInt(displaymonth.getText()) != NaN && Integer.parseInt(displayday.getText()) != NaN && Integer.parseInt(displayyear.getText()) != NaN && Integer.parseInt(displaymoney.getText()) != NaN){
+                    model.setValueAt(displaymonth.getText(),i,0);
+                    model.setValueAt(displayday.getText(),i,1);
+                    model.setValueAt(displayyear.getText(),i,2);
+                    model.setValueAt(displaythuchi.getText(),i,3);
+                    model.setValueAt(displaytype.getText(),i,4);
+                    model.setValueAt(displaymoney.getText(),i,5);
+                    tablethuchi.set(i,new BangThuChi(Integer.parseInt(displaymonth.getText()),Integer.parseInt(displayday.getText()),Integer.parseInt(displayyear.getText()),displaythuchi.getText(),displaytype.getText(),Integer.parseInt(displaymoney.getText())));
+                    FileWriter writer = new FileWriter("data.json");
+                    writer.write(gson.toJson(tablethuchi));
+                    writer.close();
+                }
+            } else {
+                JOptionPane.showMessageDialog(null,"Bạn chưa chọn hàng để sửa");
             }
-        } else {
-            JOptionPane.showMessageDialog(null,"Bạn chưa chọn ô để sửa");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (NumberFormatException e){
+            JOptionPane.showMessageDialog(null,"Phần Tháng/Ngày/Năm hoặc Tiền không phải là số");
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_updatebuttonActionPerformed
+
+    private void removebuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removebuttonActionPerformed
+        try{
+            DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+            int SelectedRowIndex = jTable1.getSelectedRow();
+            model.removeRow(SelectedRowIndex);
+            tablethuchi.remove(SelectedRowIndex);
+            displaymonth.setText("");
+            displayday.setText("");
+            displayyear.setText("");
+            displaythuchi.setText("");
+            displaytype.setText("");
+        displaymoney.setText("");
+        } catch (Exception ex){
+            JOptionPane.showMessageDialog(null,"Bạn chưa chọn hàng để xóa");
+        }
+        
+        try (FileWriter writer = new FileWriter("data.json")) {
+            writer.write(gson.toJson(tablethuchi));
+            writer.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_removebuttonActionPerformed
+
+    private void clearbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearbuttonActionPerformed
+        displaymonth.setText("");
+        displayday.setText("");
+        displayyear.setText("");
+        displaythuchi.setText("");
+        displaytype.setText("");
+        displaymoney.setText("");
+        updatebutton.setEnabled(false);
+        removebutton.setEnabled(false);
+    }//GEN-LAST:event_clearbuttonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addbutton;
+    private javax.swing.JButton clearbutton;
     private javax.swing.JTextField displayday;
     private javax.swing.JTextField displaymoney;
     private javax.swing.JTextField displaymonth;
     private javax.swing.JTextField displaythuchi;
     private javax.swing.JTextField displaytype;
     private javax.swing.JTextField displayyear;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -336,5 +393,7 @@ public class TableView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
+    private javax.swing.JButton removebutton;
+    private javax.swing.JButton updatebutton;
     // End of variables declaration//GEN-END:variables
 }
